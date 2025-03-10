@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Route, Routes } from 'react-router';
 import PokemonList from "./components/PokemonList/PokemonList";
 import NavBar from "./components/Navbar/Navbar.jsx";
+import PokemonDetails from "./components/PokemonDetails/PokemonDetails.jsx";
 
 const initialState = [
   { _id: 1, name: "bulbasaur", weight: 69, height: 7 },
@@ -15,8 +17,15 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <h1>Pokemon!</h1>
-      <PokemonList pokemon={pokemon} />
+      <Routes>
+        <Route path="/" element={<h2>Home Page</h2>} />
+        <Route  path="/pokemon" element={ <PokemonList pokemon={ pokemon } /> } />
+        <Route
+          path="pokemon/:pokemonId"
+          element={ <PokemonDetails pokemon={ pokemon } /> }
+        />
+        <Route path="*" element={<h2>Whoops, nothing here!</h2>} />
+      </Routes>
     </>
   );
 };
